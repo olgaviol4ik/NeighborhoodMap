@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/MongoDB/journal
+/MongoDB/diagnostic.data
 /.pnp
 .pnp.js
 
