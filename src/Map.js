@@ -79,7 +79,7 @@ export default function Map() {
       zoom: 8,
       mapTypeControl: false
     });
- 
+
     google.maps.event.addListener(map, "idle", function () {
       window.pullWaterparks();
 
@@ -92,6 +92,7 @@ export default function Map() {
 
   // The following group uses the location array to create an array of markers on initialize.
   function createMarkers() {
+    
     var google = window.google;
     for (var i = 0; i < waterparks.length; i++) {
       var waterpark = waterparks[i];
@@ -104,7 +105,7 @@ export default function Map() {
       var title = waterpark.name;
       var defaultIcon = makeMarkerIcon('0091ff');
       var highlightedIcon = makeMarkerIcon('FFFF24');
-     
+
       // Create a marker per location, and put into markers array.
       var marker = new google.maps.Marker({
         position: position,
@@ -115,25 +116,26 @@ export default function Map() {
         yelpid: waterpark.yelpid,
         icon: defaultIcon, 
       });
-      
+
       markers.push(marker); // Push the marker to our array of markers.
+      marker.setMap(map);
       marker.addListener('mouseover', function() {
         this.setIcon(highlightedIcon);
       });
       marker.addListener('mouseout', function() {
         this.setIcon(defaultIcon);
       });
-      marker.setMap(map);
       markersByWaterparkId[waterpark._id] = marker;
       marker.addListener("click", function () {
         populateInfoWindow(this, largeInfowindow);
+        this.setIcon(highlightedIcon);
       });
 
     }
   }
-  function makeMarkerIcon(markerColor){
-    var markerImage = new window.google.maps.MarkerImage('http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-    '|40|_|%E2%80%A2')
+  function makeMarkerIcon(markerColor) {
+    var markerImage = new window.google.maps.MarkerImage('http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
+      '|40|_|%E2%80%A2')
     return markerImage;
   }
 
