@@ -80,3 +80,6 @@ code {
   height: 24px;
   background-position: 0 -216px
 }
+a:hover {
+  cursor:pointer;
+ }

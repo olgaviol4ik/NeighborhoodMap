@@ -65,6 +65,7 @@ ul, li{
   margin:0;
   margin-top: 10px;
   padding:0;
+  cursor:pointer;
 }
 ul{
   margin-left: 10px;

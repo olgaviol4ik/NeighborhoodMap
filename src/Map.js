@@ -4,6 +4,7 @@ export default function Map() {
   var markersByWaterparkId = {};
   var markers = [];
   var largeInfowindow;
+  var activeMarker;
 
 
   this.setList = function (value) {
@@ -92,9 +93,8 @@ export default function Map() {
 
   // The following group uses the location array to create an array of markers on initialize.
   function createMarkers() {
-    
     var google = window.google;
-    for (var i = 0; i < waterparks.length; i++) {
+    for (let i = 0; i < waterparks.length; i++) { //let here important
       var waterpark = waterparks[i];
       if (markersByWaterparkId[waterpark._id]) continue;
       // Get the position from the location array.
@@ -107,7 +107,7 @@ export default function Map() {
       var highlightedIcon = makeMarkerIcon('FFFF24');
 
       // Create a marker per location, and put into markers array.
-      var marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({ //let here important too
         position: position,
         title: title,
         animation: google.maps.Animation.DROP,
@@ -119,18 +119,19 @@ export default function Map() {
 
       markers.push(marker); // Push the marker to our array of markers.
       marker.setMap(map);
-      marker.addListener('mouseover', function() {
-        this.setIcon(highlightedIcon);
-      });
-      marker.addListener('mouseout', function() {
-        this.setIcon(defaultIcon);
-      });
+     
       markersByWaterparkId[waterpark._id] = marker;
       marker.addListener("click", function () {
         populateInfoWindow(this, largeInfowindow);
         this.setIcon(highlightedIcon);
+        marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+        google.maps.Marker.MAX_ZINDEX++;
+        if(activeMarker && marker !== activeMarker){
+          activeMarker.setIcon(defaultIcon)
+        }
+        activeMarker = marker;
       });
-
+     
     }
   }
   function makeMarkerIcon(markerColor) {
@@ -155,6 +156,7 @@ export default function Map() {
       // Make sure the marker property is cleared if the infowindow is closed.
       infowindow.addListener("closeclick", function () {
         infowindow.marker = null;
+        
       });
     }
   }
