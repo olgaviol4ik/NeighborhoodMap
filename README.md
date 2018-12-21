@@ -1,6 +1,6 @@
 # Neighborhood Map Project
 
-Neighborhood Map Project is the project where  google maps api and yelp api are used to mark bay area waterparks on the map. There is a filter search by max and min price on the left panel that is responsible and disappeares then becomes hanburger menu on smaller displays. Insert min and max price and filter. Clicking on filter results will bounce and will change color of the marker and opens up infowindow with yelp rating and price information.
+Neighborhood Map Project is the project where  google maps api and yelp api are used to mark bay area waterparks on the map. There is a filter search by max and min price on the left panel that is responsive and disappears then becomes hamburger menu on smaller displays. Insert min and max price and filter. Clicking on filter results will bounce and will change color of the marker and opens up infowindow with yelp rating and price information.
 
 # Installation
 * MondoDB needs to be installed  from [Install MongoDB](https://docs.mongodb.com/manual/installation/) and added to PATH
